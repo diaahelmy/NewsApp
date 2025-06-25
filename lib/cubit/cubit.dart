@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/states.dart';
+import 'package:news_app/network/local/Cache.dart';
 import 'package:news_app/viewmodel/Business.dart';
 import 'package:news_app/viewmodel/Science.dart';
 import 'package:news_app/viewmodel/Settings.dart';
@@ -13,6 +14,8 @@ class NewsCubit extends Cubit<NewsStates> {
   NewsCubit() : super(NewsInitialState());
 
   static NewsCubit get(context) => BlocProvider.of(context);
+
+  bool isDark = false;
 
   int currentindex = 0;
 
@@ -29,7 +32,6 @@ class NewsCubit extends Cubit<NewsStates> {
     BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
   ];
 
-
   void changeBottomNavBar(int index) {
     currentindex = index;
     emit(NewsBottomNavState());
@@ -38,6 +40,7 @@ class NewsCubit extends Cubit<NewsStates> {
     if (index == 1) getBusniess('sports');
     if (index == 2) getBusniess('science');
   }
+
   List<Widget> screen = [
     BusinessScreen(),
     SportScreen(),
@@ -48,6 +51,7 @@ class NewsCubit extends Cubit<NewsStates> {
   List<dynamic> business = [];
   List<dynamic> sports = [];
   List<dynamic> science = [];
+
   void getBusniess(String category) {
     emit(NewsGetBusniessLodingState());
 
@@ -66,41 +70,55 @@ class NewsCubit extends Cubit<NewsStates> {
       default:
         targetList = [];
     }
-    if(targetList.isEmpty){
-    DioHelper.getData(
-          url: 'v2/top-headlines',
-          query: {
+    if (targetList.isEmpty) {
+      DioHelper.getData(
+            url: 'v2/top-headlines',
+            query: {
+              'category': category,
+              'apiKey': '72390fa8ef7741dbbebd6b89119de079',
+            },
+          )
+          .then((value) {
+            List<dynamic> articles = value.data['articles'];
 
-            'category': category,
-            'apiKey': '72390fa8ef7741dbbebd6b89119de079',
+            switch (category) {
+              case 'business':
+                business = articles;
+                break;
+              case 'sports':
+                sports = articles;
+                break;
+              case 'science':
+                science = articles;
+                break;
+            }
+            print(value.data['articles'][0]['title']);
+            emit(NewsGetSussecState());
+          })
+          .catchError((error) {
+            print(error.toString());
+            emit(NewsGetErrorState(error));
+          });
+    } else {
+      emit(NewsGetSussecState());
+    }
+  }
 
-          },
-        )
-        .then((value) {
-      List<dynamic> articles = value.data['articles'];
 
-      switch (category) {
-        case 'business':
-          business = articles;
-          break;
-        case 'sports':
-          sports = articles;
-          break;
-        case 'science':
-          science = articles;
-          break;
+
+  void changeThemes({bool? fromSared}) {
+    if (fromSared != null) {
+      isDark = fromSared;
+      emit(ThemeChangedState());
+    } else {
+      isDark = !isDark;
+      print('Changing theme to Dark Mode: $isDark');
+      Cache.setData(key: 'isDark', value: isDark).then((onValue) {
+        emit(ThemeChangedState());
       }
-      print(value.data['articles'][0]['title']);
-      emit(NewsGetSussecState());
-        })
-        .catchError((error) {
-          print(error.toString());
-          emit(NewsGetErrorState(error));
-        });
-  }else{
-      emit(NewsGetSussecState());
 
 
+      );
     }
   }
 }

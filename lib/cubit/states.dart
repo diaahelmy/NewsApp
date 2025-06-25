@@ -16,4 +16,6 @@ class NewsGetErrorState extends NewsStates {
 class NewsGetSportLodingState extends NewsStates {}
 class NewsGetScienceLodingState extends NewsStates {}
 
+class ThemeChangedState extends NewsStates {}
+
 

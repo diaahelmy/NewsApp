@@ -8,9 +8,8 @@ class NewsLayout extends StatelessWidget {
   const NewsLayout({super.key});
 
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => NewsCubit()..getBusniess('business'),
-      child: BlocConsumer<NewsCubit, NewsStates>(
+
+  return BlocConsumer<NewsCubit, NewsStates>(
         builder: (BuildContext context, state) {
           var cubit = NewsCubit.get(context);
           return Scaffold(
@@ -18,7 +17,17 @@ class NewsLayout extends StatelessWidget {
             actions: [
              IconButton(onPressed: (){
 
-             }, icon: Icon(Icons.search))
+             }, icon: Icon(Icons.search)),
+
+                IconButton( icon: Icon(Icons.brightness_6_outlined),
+                  onPressed: (){
+                    NewsCubit.get(context).changeThemes();
+                    print('object work themes');
+
+
+                  },
+                ),
+
             ],
             ),
             body: cubit.screen[cubit.currentindex],
@@ -33,7 +42,7 @@ class NewsLayout extends StatelessWidget {
           );
         },
         listener: (BuildContext context, state) {},
-      ),
+
     );
   }
 }
