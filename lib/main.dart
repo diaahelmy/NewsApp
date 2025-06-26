@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +36,17 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
 
               theme: ThemeData(
+                inputDecorationTheme: InputDecorationTheme(
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                  ),
+                ),
                 scaffoldBackgroundColor: Colors.white,
                 primarySwatch: Colors.amber,
                 appBarTheme: AppBarTheme(
@@ -71,6 +81,24 @@ class MyApp extends StatelessWidget {
               ),
               darkTheme: ThemeData(
                 scaffoldBackgroundColor: Color(0xFF121212),
+                inputDecorationTheme: InputDecorationTheme(
+                  filled: true,
+                  fillColor: Color(0xFF1F1F1F), // نفس لون خلفية الـ appBar
+                  labelStyle: TextStyle(color: Colors.amberAccent),
+                  prefixIconColor: Colors.amberAccent,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.amberAccent),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.grey),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.amberAccent, width: 2),
+                  ),
+                ),
                 bottomNavigationBarTheme: BottomNavigationBarThemeData(
                   type: BottomNavigationBarType.fixed,
                   selectedItemColor: Colors.amberAccent,
