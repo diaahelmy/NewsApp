@@ -8,6 +8,10 @@ It fetches the latest news articles from an API and displays them with clean UI.
 ![screen_in_page_2.jpeg](images/screen_in_page_2.jpeg)
 ![screen_in_page_3.jpeg](images/screen_in_page_3.jpeg)
 
+<img src="images/screen_in_page_1.png" alt="News App Screenshot" width="300"/>
+<img src="images/screen_in_page_2.png" alt="News App Screenshot" width="300"/>
+<img src="images/screen_in_page_3.png" alt="News App Screenshot" width="300"/>
+
 ## ✨ Features
 - Fetch latest news
 - Beautiful UI
