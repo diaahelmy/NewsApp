@@ -6,7 +6,8 @@ It fetches the latest news articles from an API and displays them with clean UI.
 ## 📸 Screenshot
 
 ![News App Screenshot](images/screen_in_page_1.png)
-
+![News App Screenshot](images/screen_in_page_2.png)
+![News App Screenshot](images/screen_in_page_3.png)
 ## ✨ Features
 - Fetch latest news
 - Beautiful UI
