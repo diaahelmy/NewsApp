@@ -4,13 +4,12 @@ This is a simple News App built with Flutter.
 It fetches the latest news articles from an API and displays them with clean UI.
 
 ## 📸 Screenshot
-![screen_in_page_1 .jpeg](images/screen_in_page_1%20.jpeg)
-![screen_in_page_2.jpeg](images/screen_in_page_2.jpeg)
-![screen_in_page_3.jpeg](images/screen_in_page_3.jpeg)
 
-<img src="images/screen_in_page_1.png" alt="News App Screenshot" width="50"/>
-<img src="images/screen_in_page_2.png" alt="News App Screenshot" width="150"/>
-<img src="images/screen_in_page_3.png" alt="News App Screenshot" width="100"/>
+| <img src="images/screen_in_page_3.jpeg" alt="يمين" width="120"/> | <img src="images/screen_in_page_2.jpeg" alt="وسط" width="120"/> | <img src="images/screen_in_page_1%20.jpeg" alt="شمال" width="120"/> |
+|:-------------------------------:|:-------------------------------:|:-------------------------------:|
+| **Business(Page)** | **Science (Page)** | Dark Mode(Search) |
+
+
 
 ## ✨ Features
 - Fetch latest news
