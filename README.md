@@ -5,7 +5,7 @@ It fetches the latest news articles from an API and displays them with clean UI.
 
 ## 📸 Screenshot
 
-![News App Screenshot](images/WhatsApp Image 2025-06-29 at 5.36.03 PM.png)
+![News App Screenshot](images/screen_in_page_1.png)
 
 ## ✨ Features
 - Fetch latest news
