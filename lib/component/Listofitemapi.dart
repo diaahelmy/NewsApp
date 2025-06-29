@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../network/webview.dart';
 
-Widget buildArticalItem(article,context) => InkWell(
-  onTap: (){
+Widget buildArticalItem(article, context) => InkWell(
+  onTap: () {
     navigateTo(context, WebviewScreen(article['url']));
   },
   child: Padding(
@@ -18,7 +19,7 @@ Widget buildArticalItem(article,context) => InkWell(
               borderRadius: BorderRadius.circular(10.0),
               image: DecorationImage(
                 image: NetworkImage('${article['urlToImage']}'),
-  
+
                 fit: BoxFit.cover,
               ),
             ),
@@ -35,14 +36,18 @@ Widget buildArticalItem(article,context) => InkWell(
                 Expanded(
                   child: Text(
                     '${article['title']} ',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,height: 1.1,),
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Text(
-                  '${article['publishedAt']}',
-                  style: TextStyle(color: Colors.grey),
+                  formatDate(article['publishedAt']),
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ],
             ),
@@ -53,12 +58,17 @@ Widget buildArticalItem(article,context) => InkWell(
   ),
 );
 
+String formatDate(String isoDate) {
+  final date = DateTime.parse(isoDate).toLocal(); // Local time
+  return DateFormat('d MMMM yyyy, hh:mm a').format(date);
+}
+
 Widget divier() =>
     Container(width: double.infinity, height: 1, color: Colors.grey[300]);
 
 Widget listView({required List list}) => ListView.separated(
   physics: BouncingScrollPhysics(),
-  itemBuilder: (context, index) => buildArticalItem(list[index],context),
+  itemBuilder: (context, index) => buildArticalItem(list[index], context),
   separatorBuilder: (context, index) => divier(),
   itemCount: list.length,
 );
